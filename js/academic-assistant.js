@@ -615,11 +615,15 @@ async function handleAcademicChatSubmit(e) {
     setAcademicInputDisabled(true);
 
     try {
+        // Get auth token
+        const token = await window.AuthService?.getToken();
+
         // Call academic chat API
         const response = await fetch(`${API_BASE_URL}/academic-chat`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': token ? `Bearer ${token}` : ''
             },
             body: JSON.stringify({
                 question: message,
@@ -914,9 +918,15 @@ async function handleAcademicImageSearch(imageFile, optionalPrompt = null) {
             formData.append('prompt', optionalPrompt);
         }
 
+        // Get auth token
+        const token = await window.AuthService?.getToken();
+
         // Call academic image search API
         const response = await fetch(`${API_BASE_URL}/academic-image-search`, {
             method: 'POST',
+            headers: {
+                'Authorization': token ? `Bearer ${token}` : ''
+            },
             body: formData
         });
 
