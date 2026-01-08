@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot - ChatGPT Style</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Logo Section -->
+            <div class="sidebar-logo">
+                <img src="https://elearning.vinhuni.edu.vn/pluginfile.php/1/theme_klass/logo/1736161506/logo.png"
+                    alt="Đại học Vinh" class="logo-img">
+                <div class="logo-text">
+                    <h2>Đại học Vinh</h2>
+                    <p>AI Assistant</p>
+                </div>
+            </div>
+
+            <div class="sidebar-header">
+                <button class="new-chat-btn" id="newChatBtn" title="Cuộc trò chuyện mới">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                    <span>Cuộc trò chuyện mới</span>
+                </button>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Thu gọn sidebar">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 5h12M4 10h12M4 15h12" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Academic Assistant Link -->
+            <div class="sidebar-academic-link">
+                <a href="academic-assistant.html" class="academic-link-btn" title="Trợ lý Học tập & Sinh viên">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="3" y="4" width="14" height="12" rx="2" stroke="currentColor" stroke-width="2" />
+                        <path d="M3 8h14M7 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <circle cx="15" cy="5" r="2" fill="currentColor" />
+                    </svg>
+                    <span>Học tập & Sinh viên</span>
+                </a>
+            </div>
+
+            <div class="chat-history" id="chatHistory">
+                <div class="history-header">
+                    <span>Lịch sử</span>
+                </div>
+                <div class="history-list" id="historyList">
+                    <!-- Chat history items will be added here -->
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-menu" id="userMenu">
+                    <div class="user-avatar">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M3 18c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <span class="user-name" id="userName">Người dùng</span>
+                    <button class="menu-btn" id="menuBtn" title="Menu">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6h8M4 10h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="menu-dropdown" id="menuDropdown" style="display: none;">
+                    <button class="menu-item" id="settingsBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M8 2v2M8 12v2M2 8h2M12 8h2" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Cài đặt</span>
+                    </button>
+                    <button class="menu-item" id="logoutBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 12H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3M10 10l3-3-3-3M13 7H6" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Đăng xuất</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Chat Header -->
+            <header class="chat-header">
+                <button class="mobile-sidebar-toggle" id="mobileSidebarToggle">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+                <div class="header-brand">
+                    <img src="https://elearning.vinhuni.edu.vn/pluginfile.php/1/theme_klass/logo/1736161506/logo.png"
+                        alt="Đại học Vinh" class="header-logo">
+                    <div class="header-title">
+                        <h1>AI Assistant</h1>
+                        <p class="header-subtitle">Trường Đại học Vinh</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="model-selector">
+                        <select id="modelSelect" class="model-select">
+                            <option value="gemini-1.5-flash">Gemini 1.5 Flash (Google - Free)</option>
+                            <option value="gpt-4o-mini">GPT-4o Mini (OpenAI)</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Messages Container -->
+            <div class="messages-container" id="messagesContainer">
+                <div class="welcome-message">
+                    <div class="welcome-logo">
+                        <img src="https://elearning.vinhuni.edu.vn/pluginfile.php/1/theme_klass/logo/1736161506/logo.png"
+                            alt="Đại học Vinh" class="welcome-logo-img">
+                    </div>
+                    <h2>Xin chào! 👋</h2>
+                    <p class="welcome-description">Tôi là <strong>AI Assistant</strong> của <strong>Trường Đại học
+                            Vinh</strong>. Tôi có thể giúp bạn trả lời câu hỏi, giải thích khái niệm, viết code, dịch
+                        thuật và nhiều hơn nữa.</p>
+                    <div class="suggestions">
+                        <button class="suggestion-chip" data-suggestion="Giải thích về AI và Machine Learning">
+                            🤖 Giải thích về AI
+                        </button>
+                        <button class="suggestion-chip" data-suggestion="Viết code Python để xử lý dữ liệu">
+                            💻 Viết code Python
+                        </button>
+                        <button class="suggestion-chip" data-suggestion="Dịch câu này sang tiếng Anh: Xin chào">
+                            🌐 Dịch sang tiếng Anh
+                        </button>
+                        <button class="suggestion-chip" data-suggestion="Tóm tắt nội dung về Trường Đại học Vinh">
+                            📚 Về Đại học Vinh
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <form id="chatForm" class="chat-form">
+                    <div class="input-wrapper">
+                        <!-- Image Upload Button -->
+                        <button type="button" class="image-upload-button" id="imageUploadBtn"
+                            title="Tìm kiếm bằng hình ảnh">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16M3 20h14a2 2 0 002-2V6a2 2 0 00-2-2H3a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+                            </svg>
+                        </button>
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                        <!-- Image Preview -->
+                        <div class="image-preview-container" id="imagePreviewContainer" style="display: none;">
+                            <img id="imagePreview" alt="Preview">
+                            <button type="button" class="image-preview-remove" id="imagePreviewRemove" title="Xóa ảnh">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+                        <textarea id="messageInput" class="message-input"
+                            placeholder="Nhập câu hỏi của bạn hoặc tải ảnh để tìm kiếm..." rows="1"></textarea>
+                        <button type="submit" class="send-button" id="sendButton" title="Gửi (Enter)">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M18 2L9 11M18 2l-7 7M18 2H2l7 7" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="input-footer">
+                        <span class="input-hint">Shift + Enter để xuống dòng, Enter để gửi • Click icon ảnh để tìm kiếm
+                            bằng hình ảnh</span>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay" style="display: none;"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script src="js/config/firebase-config.js"></script>
+    <script src="js/config/api-config.js"></script>
+    <script src="js/auth/auth-service.js"></script>
+    <script src="js/services/firestore-service.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

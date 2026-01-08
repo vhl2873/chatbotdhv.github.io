@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập Sinh viên - Đại học Vinh</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <style>
+        .student-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #22c55e;
+            margin-bottom: 16px;
+        }
+        .auth-footer {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+        .auth-footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        .info-box {
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        .info-box strong {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="https://elearning.vinhuni.edu.vn/pluginfile.php/1/theme_klass/logo/1736161506/logo.png" alt="Logo" class="auth-logo">
+                <h1>Đăng nhập Sinh viên</h1>
+                <p>Trang dành cho sinh viên Đại học Vinh</p>
+                <div class="student-badge">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 2L2 5v6c0 4 2.8 7.8 6 9 3.2-1.2 6-5 6-9V5l-6-3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M6 8l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Chỉ dành cho Sinh viên</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>📌 Lưu ý:</strong> Chỉ sinh viên Đại học Vinh đã được đăng ký trong hệ thống mới có thể đăng nhập.
+            </div>
+
+            <form id="studentLoginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email Sinh viên</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="mãsv@vinhuni.edu.vn"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Nhập mật khẩu"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+
+                <button type="submit" class="auth-button" id="loginButton">
+                    Đăng nhập Sinh viên
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>
+                    <a href="login.html">← Quay lại trang đăng nhập</a>
+                </p>
+                <p style="margin-top: 12px; font-size: 12px; color: var(--text-secondary);">
+                    Bạn là admin? <a href="admin-login.html">Đăng nhập tại đây</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    
+    <script src="js/config/firebase-config.js"></script>
+    <script src="js/config/api-config.js"></script>
+    <script src="js/auth/auth-service.js"></script>
+    <script src="js/services/firestore-service.js"></script>
+    <script src="js/auth/student-login-handler.js"></script>
+    <script>
+        const studentLoginForm = document.getElementById('studentLoginForm');
+        const loginButton = document.getElementById('loginButton');
+        const errorMessage = document.getElementById('errorMessage');
+
+        studentLoginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                showError('Vui lòng điền đầy đủ thông tin');
+                return;
+            }
+            
+            // Disable button
+            loginButton.disabled = true;
+            loginButton.textContent = 'Đang đăng nhập...';
+            hideError();
+            
+            // Sử dụng StudentLoginHandler
+            if (!window.StudentLoginHandler) {
+                showError('StudentLoginHandler not available. Vui lòng refresh trang.');
+                loginButton.disabled = false;
+                loginButton.textContent = 'Đăng nhập Sinh viên';
+                return;
+            }
+            
+            const result = await window.StudentLoginHandler.handleLogin(email, password);
+            
+            if (!result.success) {
+                showError(result.error || 'Có lỗi xảy ra khi đăng nhập');
+                loginButton.disabled = false;
+                loginButton.textContent = 'Đăng nhập Sinh viên';
+            }
+            // Nếu success, sẽ tự động redirect trong handleLogin
+        });
+        
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+        }
+        
+        function hideError() {
+            errorMessage.classList.remove('show');
+        }
+    </script>
+</body>
+</html>
+

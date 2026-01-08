@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Quản lý Hệ thống - Đại học Vinh</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/upload.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Logo Section -->
+            <div class="sidebar-logo">
+                <img src="https://elearning.vinhuni.edu.vn/pluginfile.php/1/theme_klass/logo/1736161506/logo.png"
+                    alt="Đại học Vinh" class="logo-img">
+                <div class="logo-text">
+                    <h2>Đại học Vinh</h2>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <div class="sidebar-header">
+                <button class="new-chat-btn" id="backToChatBtn" title="Quay lại Chat">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <span>Quay lại Chat</span>
+                </button>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Thu gọn sidebar">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 5h12M4 10h12M4 15h12" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="admin-nav" id="adminNav">
+                <div class="nav-section">
+                    <div class="nav-header">Quản lý</div>
+                    <a href="#accounts" class="nav-item active" data-section="accounts">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M3 18c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Quản lý Tài khoản</span>
+                    </a>
+                    <a href="upload.html" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                d="M17 8v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8M13 5V2a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v3M5 8l5 5 5-5"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Upload Tài liệu</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-menu" id="userMenu">
+                    <div class="user-avatar" id="userAvatar">
+                        <span>A</span>
+                    </div>
+                    <span class="user-name" id="userName">Admin</span>
+                    <button class="menu-btn" id="menuBtn" title="Menu">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6h8M4 10h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="menu-dropdown" id="menuDropdown" style="display: none;">
+                    <button class="menu-item" id="settingsBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M8 2v2M8 12v2M2 8h2M12 8h2" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Cài đặt</span>
+                    </button>
+                    <button class="menu-item" id="logoutBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 12H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3M10 10l3-3-3-3M13 7H6" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Đăng xuất</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="header-brand">
+                    <img src="https://elearning.vinhuni.edu.vn/pluginfile.php/1/theme_klass/logo/1736161506/logo.png"
+                        alt="Đại học Vinh" class="header-logo">
+                    <div>
+                        <h1 class="header-title">Admin Panel</h1>
+                        <p class="header-subtitle">Quản lý Hệ thống Đại học Vinh</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="admin-content" id="adminContent">
+                <!-- Accounts Management Section -->
+                <section class="content-section active" id="accountsSection">
+                    <div class="section-header">
+                        <h2>Quản lý Tài khoản Sinh viên</h2>
+                        <button class="btn-primary" id="addStudentBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span>Thêm Sinh viên</span>
+                        </button>
+                    </div>
+
+                    <!-- Search and Filters -->
+                    <div class="admin-filters">
+                        <div class="search-box">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2" />
+                                <path d="M13 13l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                            <input type="text" id="searchInput" placeholder="Tìm kiếm theo mã SV, tên, email...">
+                        </div>
+                        <select id="facultyFilter" class="filter-select">
+                            <option value="">Tất cả Khoa</option>
+                            <option value="cntt">Công nghệ Thông tin</option>
+                            <option value="su_pham">Sư phạm</option>
+                            <option value="kinh_te">Kinh tế</option>
+                            <option value="luat">Luật</option>
+                            <option value="ngoai_ngu">Ngoại ngữ</option>
+                            <option value="khoa_hoc_tu_nhien">Khoa học Tự nhiên</option>
+                        </select>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">Tất cả Trạng thái</option>
+                            <option value="active">Đang hoạt động</option>
+                            <option value="inactive">Không hoạt động</option>
+                        </select>
+                    </div>
+
+                    <!-- Students Table -->
+                    <div class="admin-table-container">
+                        <table class="admin-table" id="studentsTable">
+                            <thead>
+                                <tr>
+                                    <th>Mã SV</th>
+                                    <th>Họ và Tên</th>
+                                    <th>Email</th>
+                                    <th>Khoa</th>
+                                    <th>Ngành</th>
+                                    <th>Khóa</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTableBody">
+                                <tr>
+                                    <td colspan="8" class="loading-row">
+                                        <div class="loading-spinner"></div>
+                                        <span>Đang tải dữ liệu...</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination">
+                        <!-- Pagination sẽ được render bởi JS -->
+                    </div>
+                </section>
+
+                <!-- Upload Section -->
+                <section class="content-section" id="uploadSection">
+                    <div class="section-header">
+                        <h2>Upload Tài liệu</h2>
+                        <p class="section-subtitle">Tải lên và quản lý tài liệu cho hệ thống AI Assistant</p>
+                    </div>
+
+                    <!-- Domain Selection Tabs -->
+                    <div class="domain-tabs-wrapper">
+                        <div class="domain-tabs">
+                            <button class="domain-tab active" data-domain="general" id="tabGeneral">
+                                <div class="tab-content">
+                                    <div class="tab-icon-wrapper">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path
+                                                d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="tab-text-wrapper">
+                                        <span class="tab-title">Chat Tổng</span>
+                                        <span class="tab-desc">Tài liệu chung</span>
+                                    </div>
+                                </div>
+                            </button>
+                            <button class="domain-tab" data-domain="vinh_university" id="tabAcademic">
+                                <div class="tab-content">
+                                    <div class="tab-icon-wrapper">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <div class="tab-text-wrapper">
+                                        <span class="tab-title">Trợ lý Học tập</span>
+                                        <span class="tab-desc">Đại học Vinh</span>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Upload Card (sẽ được load từ upload.html hoặc tích hợp) -->
+                    <div id="uploadContainer">
+                        <!-- Upload functionality sẽ được tích hợp ở đây -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Student Modal -->
+    <div class="modal" id="studentModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Thêm Sinh viên</h3>
+                <button class="modal-close" id="modalClose">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="studentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="studentCode">Mã Sinh viên <span class="required">*</span></label>
+                            <input type="text" id="studentCode" name="studentCode" required placeholder="VD: 2112345">
+                        </div>
+                        <div class="form-group">
+                            <label for="fullName">Họ và Tên <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="VD: Nguyễn Văn A">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required
+                                placeholder="VD: 2112345@vinhuni.edu.vn">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu <span class="required">*</span></label>
+                            <input type="password" id="password" name="password" required
+                                placeholder="Mật khẩu mặc định">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="faculty">Khoa <span class="required">*</span></label>
+                            <select id="faculty" name="faculty" required>
+                                <option value="">-- Chọn khoa --</option>
+                                <option value="cntt">Công nghệ Thông tin</option>
+                                <option value="su_pham">Sư phạm</option>
+                                <option value="kinh_te">Kinh tế</option>
+                                <option value="luat">Luật</option>
+                                <option value="ngoai_ngu">Ngoại ngữ</option>
+                                <option value="khoa_hoc_tu_nhien">Khoa học Tự nhiên</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="major">Ngành</label>
+                            <input type="text" id="major" name="major" placeholder="VD: Kỹ thuật phần mềm">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="courseYear">Khóa</label>
+                            <input type="number" id="courseYear" name="courseYear" placeholder="VD: 2021" min="2000"
+                                max="2030">
+                        </div>
+                        <div class="form-group">
+                            <label for="isActive">Trạng thái</label>
+                            <select id="isActive" name="isActive">
+                                <option value="true">Đang hoạt động</option>
+                                <option value="false">Không hoạt động</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelBtn">Hủy</button>
+                        <button type="submit" class="btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script src="js/config/firebase-config.js"></script>
+    <script src="js/config/api-config.js"></script>
+    <script src="js/auth/auth-service.js"></script>
+    <script src="js/services/firestore-service.js"></script>
+    <script src="js/guards/admin-auth-guard.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

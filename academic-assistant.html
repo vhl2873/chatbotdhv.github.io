@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trợ lý Học tập - Đại học Vinh</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/academic-assistant.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Logo Section -->
+            <div class="sidebar-logo">
+                <img src="https://elearning.vinhuni.edu.vn/pluginfile.php/1/theme_klass/logo/1736161506/logo.png"
+                    alt="Đại học Vinh" class="logo-img">
+                <div class="logo-text">
+                    <h2>Đại học Vinh</h2>
+                    <p>Học tập & Sinh viên</p>
+                </div>
+            </div>
+
+            <div class="sidebar-header">
+                <button class="new-chat-btn" id="backToChatBtn" title="Quay lại Chat">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <span>Quay lại Chat</span>
+                </button>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Thu gọn sidebar">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 5h12M4 10h12M4 15h12" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="academic-nav" id="academicNav">
+                <div class="nav-section">
+                    <div class="nav-header">Hỗ trợ</div>
+                    <a href="#chat" class="nav-item active" data-section="chat">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2 5l8 4 8-4M2 5l8 4 8-4M2 5v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Trợ lý Học tập</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-header">Thông tin</div>
+                    <a href="#profile" class="nav-item" data-section="profile">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M3 18c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Thông tin cá nhân</span>
+                    </a>
+                    <a href="#schedule" class="nav-item" data-section="schedule">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2L3 7v11h14V7l-7-5z" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10 8v6M7 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <span>Lịch thi</span>
+                    </a>
+                    <a href="#grades" class="nav-item" data-section="grades">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2L3 7v11h14V7l-7-5z" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10 8v6M7 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <span>Điểm số</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-header">Hỗ trợ</div>
+                    <a href="#notifications" class="nav-item" data-section="notifications">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                d="M10 2a6 6 0 0 1 6 6v4a2 2 0 0 0 2 2h1a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2h1a2 2 0 0 0 2-2V8a6 6 0 0 1 6-6z"
+                                stroke="currentColor" stroke-width="2" />
+                            <circle cx="16" cy="4" r="3" fill="currentColor" />
+                        </svg>
+                        <span>Thông báo</span>
+                        <span class="nav-badge">3</span>
+                    </a>
+                    <a href="#contact" class="nav-item" data-section="contact">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2 6l8 4 8-4M2 6l8 4 8-4M2 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Liên hệ</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-menu" id="userMenu">
+                    <div class="user-avatar" id="userAvatar">
+                        <span>H</span>
+                    </div>
+                    <span class="user-name" id="userName">Sinh viên</span>
+                    <button class="menu-btn" id="menuBtn" title="Menu">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6h8M4 10h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="menu-dropdown" id="menuDropdown" style="display: none;">
+                    <button class="menu-item" id="settingsBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M8 2v2M8 12v2M2 8h2M12 8h2" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Cài đặt</span>
+                    </button>
+                    <button class="menu-item" id="logoutBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 12H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3M10 10l3-3-3-3M13 7H6" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Đăng xuất</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content academic-main">
+            <!-- Header -->
+            <header class="chat-header">
+                <div class="header-brand">
+                    <img src="https://elearning.vinhuni.edu.vn/pluginfile.php/1/theme_klass/logo/1736161506/logo.png"
+                        alt="Đại học Vinh" class="header-logo">
+                    <div>
+                        <h1 class="header-title">Trợ lý Học tập</h1>
+                        <p class="header-subtitle">Trường Đại học Vinh</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="model-selector">
+                        <select id="academicModelSelect" class="model-select">
+                            <option value="gpt-4o-mini">GPT-4o Mini (OpenAI)</option>
+                            <option value="gemini-1.5-flash">Gemini 1.5 Flash (Google - Free)</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="academic-content" id="academicContent">
+                <!-- Chat Section -->
+                <section class="content-section active" id="chatSection">
+                    <div class="section-header">
+                        <h2>Trợ lý Học tập</h2>
+                        <p class="section-subtitle">Hỗ trợ học tập, giải thích kiến thức, gợi ý lộ trình học</p>
+                    </div>
+
+                    <!-- Messages Container -->
+                    <div class="academic-chat-messages" id="academicChatMessages">
+                        <div class="welcome-message">
+                            <div class="welcome-icon">🎓</div>
+                            <h3>Xin chào! Tôi là Trợ lý Học tập</h3>
+                            <p>Tôi có thể giúp bạn:</p>
+                            <ul class="welcome-features">
+                                <li>📚 Giải thích kiến thức học phần</li>
+                                <li>📝 Gợi ý cách làm bài tập</li>
+                                <li>🗺️ Đề xuất lộ trình học tập</li>
+                                <li>📋 Tư vấn về quy chế đào tạo</li>
+                            </ul>
+                            <div class="suggestions">
+                                <button class="suggestion-chip" data-suggestion="Lộ trình học tập ngành CNTT năm 1">
+                                    Lộ trình học tập ngành CNTT
+                                </button>
+                                <button class="suggestion-chip"
+                                    data-suggestion="Giải thích về lập trình hướng đối tượng">
+                                    Giải thích lập trình OOP
+                                </button>
+                                <button class="suggestion-chip" data-suggestion="Quy chế đào tạo về điểm số">
+                                    Quy chế đào tạo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="academic-input-area">
+                        <form id="academicChatForm" class="academic-chat-form">
+                            <div class="input-wrapper">
+                                <!-- Image Upload Button -->
+                                <button type="button" class="image-upload-button" id="academicImageUploadBtn"
+                                    title="Tìm kiếm bằng hình ảnh">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16M3 20h14a2 2 0 002-2V6a2 2 0 00-2-2H3a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+                                    </svg>
+                                </button>
+                                <input type="file" id="academicImageInput" accept="image/*" style="display: none;">
+                                <!-- Image Preview -->
+                                <div class="image-preview-container" id="academicImagePreviewContainer"
+                                    style="display: none;">
+                                    <img id="academicImagePreview" alt="Preview">
+                                    <button type="button" class="image-preview-remove" id="academicImagePreviewRemove"
+                                        title="Xóa ảnh">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <textarea id="academicMessageInput" class="message-input"
+                                    placeholder="Hỏi về học phần, bài tập, lộ trình học tập hoặc tải ảnh để tìm kiếm..."
+                                    rows="1"></textarea>
+                                <button type="submit" class="send-button" id="academicSendButton" title="Gửi (Enter)">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M18 2L9 11M18 2l-7 7M18 2H2l7 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="input-footer">
+                                <span class="input-hint">Shift + Enter để xuống dòng, Enter để gửi • Click icon ảnh để
+                                    tìm kiếm bằng hình ảnh</span>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section class="content-section" id="profileSection">
+                    <div class="section-header">
+                        <h2>Thông tin cá nhân</h2>
+                        <button class="edit-btn" id="editProfileBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M11 2L14 5M2 14l2-7 7-7 3 3-7 7-2 2z" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Chỉnh sửa
+                        </button>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="profile-avatar-large">
+                            <span>H</span>
+                        </div>
+                        <div class="profile-info">
+                            <div class="info-row">
+                                <span class="info-label">Mã sinh viên:</span>
+                                <span class="info-value">SV2024001</span>
+
+                                <div class="info-row">
+                                    <span class="info-label">Họ và tên:</span>
+                                    <span class="info-value">Nguyễn Văn A</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Ngày sinh:</span>
+                                    <span class="info-value">15/03/2003</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Lớp:</span>
+                                    <span class="info-value">CNTT-K45A</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Khoa:</span>
+                                    <span class="info-value">Công nghệ Thông tin</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Email:</span>
+                                    <span class="info-value">nguyenvana@vinhuni.edu.vn</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Số điện thoại:</span>
+                                    <span class="info-value">0912345678</span>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+
+                <!-- Exam Schedule Section -->
+                <section class="content-section" id="scheduleSection">
+                    <div class="section-header">
+                        <h2>Lịch thi</h2>
+                        <select class="week-select" id="weekSelect">
+                            <option value="current">Tuần hiện tại</option>
+                            <option value="next">Tuần sau</option>
+                        </select>
+                    </div>
+
+                    <div class="exam-schedule-container">
+                        <div class="exam-list" id="examList">
+                            <!-- Exam items will be added here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Grades Section -->
+                <section class="content-section" id="gradesSection">
+                    <div class="section-header">
+                        <h2>Điểm số</h2>
+                        <select class="semester-select" id="semesterSelect">
+                            <option value="2024-1">Học kỳ 1 - 2024-2025</option>
+                            <option value="2023-2">Học kỳ 2 - 2023-2024</option>
+                        </select>
+                    </div>
+
+                    <div class="grades-summary">
+                        <div class="summary-card">
+                            <div class="summary-label">Điểm TB tích lũy</div>
+                            <div class="summary-value">3.65</div>
+                            <div class="summary-grade">Khá</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-label">Tín chỉ tích lũy</div>
+                            <div class="summary-value">120</div>
+                            <div class="summary-grade">/ 150</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-label">Xếp loại</div>
+                            <div class="summary-value">Khá</div>
+                            <div class="summary-grade">Top 25%</div>
+                        </div>
+                    </div>
+
+                    <div class="grades-table-container">
+                        <table class="grades-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã môn</th>
+                                    <th>Tên môn học</th>
+                                    <th>Tín chỉ</th>
+                                    <th>Điểm QT</th>
+                                    <th>Điểm TH</th>
+                                    <th>Điểm CK</th>
+                                    <th>Điểm TB</th>
+                                    <th>Điểm chữ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="gradesTableBody">
+                                <!-- Grades will be added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Notifications Section -->
+                <section class="content-section" id="notificationsSection">
+                    <div class="section-header">
+                        <h2>Thông báo</h2>
+                        <button class="mark-all-read-btn" id="markAllReadBtn">Đánh dấu đã đọc</button>
+                    </div>
+
+                    <div class="notifications-list" id="notificationsList">
+                        <!-- Notifications will be added here -->
+                    </div>
+                </section>
+
+                <!-- Contact Section -->
+                <section class="content-section" id="contactSection">
+                    <div class="section-header">
+                        <h2>Liên hệ</h2>
+                    </div>
+
+                    <div class="contact-cards">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M3 8l7.89 4.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"
+                                        stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </div>
+                            <h3>Phòng Đào tạo</h3>
+                            <p>Email: daotao@vinhuni.edu.vn</p>
+                            <p>Điện thoại: 0238.3855.452</p>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor"
+                                        stroke-width="2" />
+                                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </div>
+                            <h3>Địa chỉ</h3>
+                            <p>182 Lê Duẩn, Vinh, Nghệ An</p>
+                        </div>
+
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                                        stroke="currentColor" stroke-width="2" />
+                                </svg>
+                            </div>
+                            <h3>Hotline</h3>
+                            <p>0238.3855.452</p>
+                            <p>Thứ 2 - Thứ 6: 7:30 - 17:00</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script src="js/config/firebase-config.js"></script>
+    <script src="js/config/api-config.js"></script>
+    <script src="js/auth/auth-service.js"></script>
+    <script src="js/services/firestore-service.js"></script>
+    <script src="js/services/firestore-service.js"></script>
+    <script src="js/guards/academic-auth-guard.js"></script>
+    <script src="js/config/api-config.js"></script>
+    <script src="js/academic-assistant.js"></script>
+</body>
+
+</html>

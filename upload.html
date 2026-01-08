@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Tài liệu - Đại học Vinh</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📤</text></svg>">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/upload.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Logo Section -->
+            <div class="sidebar-logo">
+                <img src="https://elearning.vinhuni.edu.vn/pluginfile.php/1/theme_klass/logo/1736161506/logo.png"
+                    alt="Đại học Vinh" class="logo-img">
+                <div class="logo-text">
+                    <h2>Đại học Vinh</h2>
+                    <p>Quản lý Tài liệu</p>
+                </div>
+            </div>
+
+            <div class="sidebar-header">
+                <button class="new-chat-btn" id="backToChatBtn" title="Quay lại Chat">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <span>Quay lại Chat</span>
+                </button>
+                <button class="sidebar-toggle" id="sidebarToggle" title="Thu gọn sidebar">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M4 5h12M4 10h12M4 15h12" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="admin-nav" id="uploadNav">
+                <div class="nav-section">
+                    <div class="nav-header">Quản lý</div>
+                    <a href="admin.html" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M3 18c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Quản lý Tài khoản</span>
+                    </a>
+                    <a href="#" class="nav-item active">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                d="M17 8v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8M13 5V2a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v3M5 8l5 5 5-5"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Upload Tài liệu</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-menu" id="userMenu">
+                    <div class="user-avatar" id="userAvatar">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M3 18c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <span class="user-name" id="userName">Admin</span>
+                    <button class="menu-btn" id="menuBtn" title="Menu">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M4 6h8M4 10h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="menu-dropdown" id="menuDropdown" style="display: none;">
+                    <button class="menu-item" id="settingsBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M8 2v2M8 12v2M2 8h2M12 8h2" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" />
+                        </svg>
+                        <span>Cài đặt</span>
+                    </button>
+                    <button class="menu-item" id="logoutBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 14H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3M10 11l3-3-3-3M13 8H6" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Đăng xuất</span>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="upload-main">
+            <div class="upload-container">
+                <!-- Header -->
+                <div class="upload-page-header">
+                    <div>
+                        <h1 class="page-title">📤 Upload Tài liệu</h1>
+                        <p class="page-subtitle">Tải lên và quản lý tài liệu cho hệ thống AI Assistant</p>
+                    </div>
+                </div>
+
+                <!-- Domain Selection Tabs -->
+                <div class="domain-tabs-wrapper">
+                    <div class="domain-tabs">
+                        <button class="domain-tab active" data-domain="general" id="tabGeneral">
+                            <div class="tab-content">
+                                <div class="tab-icon-wrapper">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path
+                                            d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="tab-text-wrapper">
+                                    <span class="tab-title">Chat Tổng</span>
+                                    <span class="tab-desc">Tài liệu chung</span>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="domain-tab" data-domain="vinh_university" id="tabAcademic">
+                            <div class="tab-content">
+                                <div class="tab-icon-wrapper">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="tab-text-wrapper">
+                                    <span class="tab-title">Trợ lý Học tập</span>
+                                    <span class="tab-desc">Đại học Vinh</span>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Upload Card -->
+                <div class="upload-card">
+                    <!-- Card Header -->
+                    <div class="upload-card-header">
+                        <div class="card-header-content">
+                            <h2 id="uploadTitle" class="card-title">Upload tài liệu cho Chat Tổng</h2>
+                            <p class="card-subtitle" id="uploadSubtitle">Chọn file PDF, DOCX, TXT hoặc MD để upload</p>
+                        </div>
+                    </div>
+
+                    <!-- Academic Warning -->
+                    <div class="academic-warning-card" id="academicWarning" style="display: none;">
+                        <div class="warning-header">
+                            <div class="warning-icon-wrapper">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 2L2 5v8c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M10 7v4M10 13h.01" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <div class="warning-content">
+                                <h3 class="warning-title">Tài liệu Học vụ Đại học Vinh</h3>
+                                <p class="warning-text">Tài liệu upload vào "Trợ lý Học tập" chỉ dùng cho sinh viên
+                                    Trường Đại học Vinh. Vui lòng điền đầy đủ thông tin metadata bên dưới.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drag & Drop Area -->
+                    <div class="upload-dropzone" id="uploadArea">
+                        <div class="dropzone-content">
+                            <div class="dropzone-icon">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                            </div>
+                            <div class="dropzone-text">
+                                <h3 class="dropzone-title">Kéo thả file vào đây</h3>
+                                <p class="dropzone-subtitle">hoặc <button type="button" class="browse-link-btn">click để
+                                        chọn file</button></p>
+                            </div>
+                            <div class="dropzone-formats">
+                                <span class="format-tag">PDF</span>
+                                <span class="format-tag">DOCX</span>
+                                <span class="format-tag">TXT</span>
+                                <span class="format-tag">MD</span>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" class="file-input" accept=".pdf,.txt,.md,.docx" multiple>
+                    </div>
+
+                    <!-- Academic Metadata Form -->
+                    <div class="metadata-card" id="academicMetadata" style="display: none;">
+                        <div class="metadata-header">
+                            <h3 class="metadata-title">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 2L2 5v8c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                Thông tin tài liệu học vụ
+                            </h3>
+                        </div>
+                        <div class="metadata-form">
+                            <div class="metadata-row">
+                                <div class="metadata-field">
+                                    <label for="facultySelect" class="field-label">
+                                        Khoa
+                                        <span class="required-badge">*</span>
+                                    </label>
+                                    <select id="facultySelect" class="field-input field-select">
+                                        <option value="">-- Chọn khoa --</option>
+                                        <option value="cntt">Công nghệ Thông tin</option>
+                                        <option value="su_pham">Sư phạm</option>
+                                        <option value="kinh_te">Kinh tế</option>
+                                        <option value="luat">Luật</option>
+                                        <option value="ngoai_ngu">Ngoại ngữ</option>
+                                        <option value="khoa_hoc_tu_nhien">Khoa học Tự nhiên</option>
+                                    </select>
+                                </div>
+                                <div class="metadata-field">
+                                    <label for="docTypeSelect" class="field-label">
+                                        Loại tài liệu
+                                        <span class="required-badge">*</span>
+                                    </label>
+                                    <select id="docTypeSelect" class="field-input field-select">
+                                        <option value="">-- Chọn loại --</option>
+                                        <option value="lecture">Bài giảng</option>
+                                        <option value="syllabus">Đề cương</option>
+                                        <option value="textbook">Giáo trình</option>
+                                        <option value="exercise">Bài tập</option>
+                                        <option value="regulation">Quy chế</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="metadata-row">
+                                <div class="metadata-field">
+                                    <label for="majorInput" class="field-label">Ngành học</label>
+                                    <input type="text" id="majorInput" class="field-input"
+                                        placeholder="VD: Công nghệ Thông tin">
+                                </div>
+                                <div class="metadata-field">
+                                    <label for="courseInput" class="field-label">Học phần</label>
+                                    <input type="text" id="courseInput" class="field-input"
+                                        placeholder="VD: CTDLGT, Lập trình Web">
+                                </div>
+                            </div>
+                            <div class="metadata-error" id="metadataError" style="display: none;"></div>
+                        </div>
+                    </div>
+
+                    <!-- File Preview -->
+                    <div class="files-preview" id="filePreviewContainer" style="display: none;">
+                        <div class="files-header">
+                            <h3 class="files-title">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M4 4h12v12H4V4z" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M6 8h8M6 12h6" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                                File đã chọn
+                            </h3>
+                            <button class="clear-all-btn" id="clearBtn">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                                Xóa tất cả
+                            </button>
+                        </div>
+                        <div class="files-list" id="fileList"></div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="upload-progress" id="progressContainer" style="display: none;">
+                        <div class="progress-header">
+                            <span class="progress-label">Đang upload...</span>
+                            <span class="progress-percent" id="progressPercent">0%</span>
+                        </div>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Button -->
+                    <div class="upload-actions">
+                        <button class="upload-btn" id="uploadBtn" disabled>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path
+                                    d="M17 8v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8M13 5V2a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v3M5 8l5 5 5-5"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <span>Upload Tài liệu</span>
+                        </button>
+                    </div>
+
+                    <!-- Status Message -->
+                    <div class="status-alert" id="statusMessage"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- PDF Parser: Uncomment to enable PDF parsing -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script> -->
+
+    <!-- DOCX Parser: Uncomment to enable DOCX parsing -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script> -->
+
+    <!-- PDF Parser: Uncomment to enable PDF parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Configure PDF.js worker
+        if (typeof pdfjsLib !== 'undefined') {
+            pdfjsLib.GlobalWorkerOptions.workerSrc =
+                'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+    </script>
+
+    <!-- DOCX Parser: Uncomment to enable DOCX parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+
+    <script src="js/config/api-config.js"></script>
+    <script src="js/auth/auth-service.js"></script>
+    <script src="js/upload.js"></script>
+    <script>
+        // Sidebar toggle
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const backToChatBtn = document.getElementById('backToChatBtn');
+        const menuBtn = document.getElementById('menuBtn');
+        const menuDropdown = document.getElementById('menuDropdown');
+
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', () => {
+                sidebar?.classList.toggle('collapsed');
+                localStorage.setItem('sidebarCollapsed', sidebar?.classList.contains('collapsed'));
+            });
+        }
+
+        if (backToChatBtn) {
+            backToChatBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+        }
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                menuDropdown.style.display = menuDropdown.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!menuBtn?.contains(e.target) && !menuDropdown?.contains(e.target)) {
+                menuDropdown.style.display = 'none';
+            }
+        });
+
+        // Load saved sidebar state
+        const savedState = localStorage.getItem('sidebarCollapsed');
+        if (savedState === 'true' && sidebar) {
+            sidebar.classList.add('collapsed');
+        }
+
+        // Set Admin user info
+        const userName = document.getElementById('userName');
+        const userAvatar = document.getElementById('userAvatar');
+        if (userName) {
+            userName.textContent = 'Admin';
+        }
+        if (userAvatar) {
+            userAvatar.innerHTML = '<span>A</span>';
+        }
+    </script>
+</body>
+
+</html>
